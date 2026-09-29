@@ -1,5 +1,20 @@
+:root {
+  --color-fondo: #f4f4f5;
+  --color-superficie: #ffffff;
+  --color-texto: #27272a;
+  --color-texto-suave: #71717a;
+  --color-borde: #e4e4e7;
+  --color-nav: #52525b;
+  --color-primario: #52525b;
+  --color-primario-oscuro: #3f3f46;
+  --color-peligro: #a14a4a;
+  --radio: 6px;
+}
+
 html {
   font-size: 14px;
+  position: relative;
+  min-height: 100%;
 }
 
 @media (min-width: 768px) {
@@ -8,15 +23,213 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
 body {
-  margin-bottom: 60px;
+  margin-bottom: 70px;
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  font-family: "Segoe UI", system-ui, -apple-system, Roboto, sans-serif;
+}
+
+/* ---------- Navegación ---------- */
+
+.navbar-tienda {
+  background-color: var(--color-nav);
+}
+
+.navbar-tienda .navbar-brand {
+  font-weight: 600;
+  color: #fff;
+}
+
+.navbar-tienda .nav-link {
+  color: #e4e4e7;
+}
+
+.navbar-tienda .nav-link:hover,
+.navbar-tienda .nav-link:focus {
+  color: #fff;
+}
+
+/* ---------- Encabezados ---------- */
+
+.page-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--color-borde);
+}
+
+.page-header h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.page-header p {
+  margin: 0;
+  color: var(--color-texto-suave);
+}
+
+/* ---------- Opciones del menú principal ---------- */
+
+.menu-card {
+  display: block;
+  height: 100%;
+  padding: 1.5rem;
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 0.15s ease;
+}
+
+.menu-card:hover {
+  border-color: var(--color-texto-suave);
+  color: inherit;
+}
+
+.menu-card h2 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.25rem;
+}
+
+.menu-card p {
+  margin: 0;
+  color: var(--color-texto-suave);
+}
+
+/* ---------- Paneles y formularios ---------- */
+
+.card-panel {
+  background: var(--color-superficie);
+  border: 1px solid var(--color-borde);
+  border-radius: var(--radio);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.panel-peligro {
+  border-left: 3px solid var(--color-peligro);
+}
+
+.form-label {
+  font-weight: 500;
+}
+
+.form-control,
+.form-select {
+  border-radius: var(--radio);
+}
+
+.btn {
+  border-radius: var(--radio);
+}
+
+.btn-primary {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+}
+
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active {
+  background-color: var(--color-primario-oscuro);
+  border-color: var(--color-primario-oscuro);
+}
+
+.btn-outline-primary {
+  color: var(--color-primario);
+  border-color: var(--color-borde);
+}
+
+.btn-outline-primary:hover {
+  color: #fff;
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+}
+
+.btn-danger {
+  background-color: var(--color-peligro);
+  border-color: var(--color-peligro);
+}
+
+.btn-danger:hover,
+.btn-danger:focus {
+  background-color: #8a3d3d;
+  border-color: #8a3d3d;
+}
+
+.btn-outline-danger {
+  color: var(--color-peligro);
+  border-color: var(--color-borde);
+}
+
+.btn-outline-danger:hover {
+  color: #fff;
+  background-color: var(--color-peligro);
+  border-color: var(--color-peligro);
+}
+
+.btn:focus, .btn:active:focus, .form-control:focus, .form-select:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(82, 82, 91, 0.2);
+  border-color: var(--color-texto-suave);
+}
+
+.form-check-input:checked {
+  background-color: var(--color-primario);
+  border-color: var(--color-primario);
+}
+
+.validation-summary-valid {
+  display: none;
+}
+
+/* ---------- Tabla ---------- */
+
+.table thead th {
+  color: var(--color-texto-suave);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  border-bottom-width: 1px;
+}
+
+.col-check {
+  width: 40px;
+}
+
+.badge-categoria {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radio);
+  background-color: var(--color-fondo);
+  border: 1px solid var(--color-borde);
+  color: var(--color-texto);
+  font-size: 0.85rem;
+}
+
+/* ---------- Enlaces y pie ---------- */
+
+.link-volver {
+  display: inline-block;
+  color: var(--color-texto-suave);
+  text-decoration: none;
+}
+
+.link-volver:hover {
+  color: var(--color-texto);
+  text-decoration: underline;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  line-height: 60px;
+  font-size: 0.9rem;
+  color: var(--color-texto-suave);
+  border-top: 1px solid var(--color-borde);
+  background-color: var(--color-superficie);
 }

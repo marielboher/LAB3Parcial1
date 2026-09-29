@@ -4,9 +4,34 @@
     ViewData["Title"] = "Inicio";
 }
 
-<h1>TechStore - Tienda Online</h1>
-<p>Seleccione una opción:</p>
+<div class="page-header">
+    <h1>TechStore</h1>
+    <p>Gestión de productos de la tienda online.</p>
+</div>
 
-<ul>
-    <li><a asp-page="/Alta">Alta de productos</a></li>
-</ul>
+<div class="row g-3">
+    <div class="col-sm-6 col-lg-3">
+        <a asp-page="/Alta" class="menu-card">
+            <h2>Alta</h2>
+            <p>Cargar un nuevo producto.</p>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a asp-page="/Consulta" class="menu-card">
+            <h2>Consulta</h2>
+            <p>Listar y buscar productos.</p>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a asp-page="/Modificacion" class="menu-card">
+            <h2>Modificación</h2>
+            <p>Editar un producto y su categoría.</p>
+        </a>
+    </div>
+    <div class="col-sm-6 col-lg-3">
+        <a asp-page="/Baja" class="menu-card">
+            <h2>Baja</h2>
+            <p>Eliminar productos seleccionados.</p>
+        </a>
+    </div>
+</div>

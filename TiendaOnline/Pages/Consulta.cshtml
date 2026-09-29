@@ -1,0 +1,71 @@
+@page
+@model ConsultaModel
+@{
+    ViewData["Title"] = "Consulta de productos";
+}
+
+<div class="page-header">
+    <h1>Consulta de productos</h1>
+    <p class="text-muted">Listado de productos con su categoría.</p>
+</div>
+
+<div class="card-panel">
+    <form method="get" class="row g-3 align-items-end mb-4">
+        <div class="col-md-5">
+            <label asp-for="Nombre" class="form-label">Buscar por nombre</label>
+            <input asp-for="Nombre" class="form-control" placeholder="Ej: Notebook" />
+        </div>
+        <div class="col-md-4">
+            <label asp-for="IdCategoria" class="form-label">Categoría</label>
+            <select asp-for="IdCategoria" asp-items="Model.Categorias" class="form-select">
+                <option value="">Todas</option>
+            </select>
+        </div>
+        <div class="col-md-3 d-flex gap-2">
+            <button type="submit" class="btn btn-primary flex-grow-1">Buscar</button>
+            @if (Model.HayFiltros)
+            {
+                <a asp-page="/Consulta" class="btn btn-outline-secondary">Limpiar</a>
+            }
+        </div>
+    </form>
+
+    @if (Model.Productos.Count == 0)
+    {
+        <div class="alert alert-info mb-0">No se encontraron productos.</div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nombre</th>
+                        <th>Categoría</th>
+                        <th class="text-end">Precio</th>
+                        <th class="text-end">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var producto in Model.Productos)
+                    {
+                        <tr>
+                            <td>@producto.IdProducto</td>
+                            <td>@producto.Nombre</td>
+                            <td><span class="badge-categoria">@producto.Categoria</span></td>
+                            <td class="text-end text-nowrap">@Formato.Precio(producto.Precio)</td>
+                            <td class="text-end text-nowrap">
+                                <a asp-page="/Modificacion" asp-route-id="@producto.IdProducto" class="btn btn-sm btn-outline-primary">Modificar</a>
+                                <a asp-page="/Baja" asp-route-id="@producto.IdProducto" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <p class="text-muted small mt-3 mb-0">Total: @Model.Productos.Count producto(s).</p>
+    }
+</div>
+
+<a asp-page="/Index" class="link-volver">&larr; Volver a la página principal</a>

@@ -1,0 +1,80 @@
+@page "{id:int?}"
+@model ModificacionModel
+@{
+    ViewData["Title"] = "Modificación de productos";
+}
+
+<div class="page-header">
+    <h1>Modificación de productos</h1>
+    <p class="text-muted">Edite los datos del producto y su categoría.</p>
+</div>
+
+@if (!string.IsNullOrEmpty(Model.Mensaje))
+{
+    <div class="alert alert-success">@Model.Mensaje</div>
+}
+
+@if (!Model.ProductoSeleccionado)
+{
+    <div class="card-panel col-lg-6">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <form method="get">
+            <div class="mb-3">
+                <label for="id" class="form-label">Seleccione el producto a modificar</label>
+                <select id="id" name="id" asp-items="Model.Productos" class="form-select" required>
+                    <option value="">-- Seleccione --</option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Editar</button>
+        </form>
+    </div>
+}
+else
+{
+    <div class="card-panel col-lg-6">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+            <input type="hidden" asp-for="Producto.IdProducto" />
+
+            <div class="mb-3">
+                <label class="form-label">ID</label>
+                <input value="@Model.Producto.IdProducto" class="form-control" disabled />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Producto.Nombre" class="form-label"></label>
+                <input asp-for="Producto.Nombre" class="form-control" />
+                <span asp-validation-for="Producto.Nombre" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Producto.Precio" class="form-label"></label>
+                <input asp-for="Producto.Precio" type="number" step="0.01" min="0" class="form-control" />
+                <span asp-validation-for="Producto.Precio" class="text-danger"></span>
+            </div>
+
+            <div class="mb-4">
+                <label asp-for="Producto.IdCategoria" class="form-label"></label>
+                <select asp-for="Producto.IdCategoria" asp-items="Model.Categorias" class="form-select">
+                    <option value="">-- Seleccione --</option>
+                </select>
+                <span asp-validation-for="Producto.IdCategoria" class="text-danger"></span>
+            </div>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                <a asp-page="/Modificacion" asp-route-id="" class="btn btn-outline-secondary">Elegir otro producto</a>
+            </div>
+        </form>
+    </div>
+}
+
+<div class="d-flex gap-4">
+    <a asp-page="/Index" class="link-volver">&larr; Volver a la página principal</a>
+    <a asp-page="/Consulta" class="link-volver">Ir a la consulta</a>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
