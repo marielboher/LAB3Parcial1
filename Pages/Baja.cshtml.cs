@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Data.SqlClient;
-using TiendaOnline.Data;
-using TiendaOnline.Models;
 
 namespace TiendaOnline.Pages;
 

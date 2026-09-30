@@ -1,8 +1,6 @@
 using System.Data;
 using Microsoft.Data.SqlClient;
-using TiendaOnline.Models;
-
-namespace TiendaOnline.Data;
+namespace TiendaOnline.Pages;
 
 public class TiendaDatos
 {

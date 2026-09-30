@@ -1,6 +1,6 @@
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
-using TiendaOnline.Data;
+using TiendaOnline.Pages;
 
 var builder = WebApplication.CreateBuilder(args);
 

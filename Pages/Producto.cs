@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
-namespace TiendaOnline.Models;
+namespace TiendaOnline.Pages;
 
 public class Producto
 {
+    private static readonly CultureInfo Argentina = CultureInfo.GetCultureInfo("es-AR");
+
     public int IdProducto { get; set; }
 
     [Required(ErrorMessage = "Ingrese el nombre.")]
@@ -21,4 +24,6 @@ public class Producto
     public int? IdCategoria { get; set; }
 
     public string? Categoria { get; set; }
+
+    public string PrecioTexto => Precio.HasValue ? Precio.Value.ToString("C2", Argentina) : string.Empty;
 }

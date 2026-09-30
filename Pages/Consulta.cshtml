@@ -54,7 +54,7 @@
                             <td>@producto.IdProducto</td>
                             <td>@producto.Nombre</td>
                             <td><span class="badge-categoria">@producto.Categoria</span></td>
-                            <td class="text-end text-nowrap">@Formato.Precio(producto.Precio)</td>
+                            <td class="text-end text-nowrap">@producto.PrecioTexto</td>
                             <td class="text-end text-nowrap">
                                 <a asp-page="/Modificacion" asp-route-id="@producto.IdProducto" class="btn btn-sm btn-outline-primary">Modificar</a>
                                 <a asp-page="/Baja" asp-route-id="@producto.IdProducto" class="btn btn-sm btn-outline-danger">Eliminar</a>

@@ -1,4 +1,4 @@
-namespace TiendaOnline.Models;
+namespace TiendaOnline.Pages;
 
 public class Categoria
 {

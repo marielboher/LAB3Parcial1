@@ -23,7 +23,7 @@
         <ul class="mb-3">
             @foreach (var producto in Model.Productos)
             {
-                <li><strong>@producto.Nombre</strong> (@producto.Categoria) - @Formato.Precio(producto.Precio)</li>
+                <li><strong>@producto.Nombre</strong> (@producto.Categoria) - @producto.PrecioTexto</li>
             }
         </ul>
         <p class="text-muted small">Esta acción no se puede deshacer.</p>
@@ -72,7 +72,7 @@ else
                                     <td>@producto.IdProducto</td>
                                     <td><label for="@idCheck" class="mb-0">@producto.Nombre</label></td>
                                     <td><span class="badge-categoria">@producto.Categoria</span></td>
-                                    <td class="text-end text-nowrap">@Formato.Precio(producto.Precio)</td>
+                                    <td class="text-end text-nowrap">@producto.PrecioTexto</td>
                                 </tr>
                             }
                         </tbody>
