@@ -5,7 +5,15 @@ using TiendaOnline.Pages;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
+builder.Services.AddRazorPages().AddMvcOptions(options =>
+{
+    var mensajes = options.ModelBindingMessageProvider;
+    mensajes.SetValueMustNotBeNullAccessor(_ => "Este campo es obligatorio.");
+    mensajes.SetMissingBindRequiredValueAccessor(_ => "Este campo es obligatorio.");
+    mensajes.SetValueIsInvalidAccessor(valor => $"El valor '{valor}' no es válido.");
+    mensajes.SetAttemptedValueIsInvalidAccessor((valor, _) => $"El valor '{valor}' no es válido.");
+    mensajes.SetValueMustBeANumberAccessor(_ => "Ingrese un número válido.");
+});
 builder.Services.AddScoped<TiendaDatos>();
 
 var app = builder.Build();

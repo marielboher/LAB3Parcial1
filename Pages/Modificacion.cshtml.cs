@@ -52,6 +52,11 @@ public class ModificacionModel : PageModel
     {
         ProductoSeleccionado = true;
 
+        if (ModelState.IsValid && !await _datos.ExisteCategoriaAsync(Producto.IdCategoria!.Value))
+        {
+            ModelState.AddModelError("Producto.IdCategoria", "La categoría seleccionada no existe.");
+        }
+
         if (!ModelState.IsValid)
         {
             await CargarCategoriasAsync();

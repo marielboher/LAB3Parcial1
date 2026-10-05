@@ -32,6 +32,17 @@ public class TiendaDatos
         return categorias;
     }
 
+    public async Task<bool> ExisteCategoriaAsync(int idCategoria)
+    {
+        const string sql = "SELECT COUNT(*) FROM categorias WHERE idCategoria = @idCategoria";
+
+        await using var conexion = new SqlConnection(_connectionString);
+        await using var comando = new SqlCommand(sql, conexion);
+        comando.Parameters.Add("@idCategoria", SqlDbType.Int).Value = idCategoria;
+        await conexion.OpenAsync();
+        return (int)(await comando.ExecuteScalarAsync())! > 0;
+    }
+
     public async Task<List<Producto>> ObtenerProductosAsync(string? nombre = null, int? idCategoria = null)
     {
         const string sql = @"

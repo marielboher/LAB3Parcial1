@@ -16,72 +16,70 @@
 
 <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
 
-@if (Model.Confirmando)
-{
-    <div class="card-panel panel-peligro">
-        <h2 class="h5 mb-3">¿Está seguro de que desea eliminar @(Model.Productos.Count == 1 ? "el siguiente producto" : $"los siguientes {Model.Productos.Count} productos")?</h2>
-        <ul class="mb-3">
-            @foreach (var producto in Model.Productos)
-            {
-                <li><strong>@producto.Nombre</strong> (@producto.Categoria) - @producto.PrecioTexto</li>
-            }
-        </ul>
-        <p class="text-muted small">Esta acción no se puede deshacer.</p>
-
-        <form method="post" asp-page-handler="Confirmar" class="d-flex gap-2">
-            @foreach (var producto in Model.Productos)
-            {
-                <input type="hidden" name="Seleccionados" value="@producto.IdProducto" />
-            }
-            <button type="submit" class="btn btn-danger">Sí, eliminar</button>
-            <a asp-page="/Baja" class="btn btn-outline-secondary">Cancelar</a>
-        </form>
-    </div>
-}
-else
-{
-    <div class="card-panel">
-        @if (Model.Productos.Count == 0)
-        {
-            <div class="alert alert-info mb-0">No hay productos cargados.</div>
-        }
-        else
-        {
-            <form method="post" asp-page-handler="Seleccionar">
-                <div class="table-responsive">
-                    <table class="table table-hover align-middle">
-                        <thead>
+<div class="card-panel">
+    @if (Model.Productos.Count == 0)
+    {
+        <div class="alert alert-info mb-0">No hay productos cargados.</div>
+    }
+    else
+    {
+        <form method="post" id="form-baja">
+            <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th class="col-check"></th>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Categoría</th>
+                            <th class="text-end">Precio</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var producto in Model.Productos)
+                        {
+                            var idCheck = $"producto-{producto.IdProducto}";
                             <tr>
-                                <th class="col-check"></th>
-                                <th>ID</th>
-                                <th>Nombre</th>
-                                <th>Categoría</th>
-                                <th class="text-end">Precio</th>
+                                <td class="col-check">
+                                    <input type="checkbox" class="form-check-input" id="@idCheck"
+                                           name="Seleccionados" value="@producto.IdProducto"
+                                           data-nombre="@producto.Nombre" />
+                                </td>
+                                <td>@producto.IdProducto</td>
+                                <td><label for="@idCheck" class="mb-0">@producto.Nombre</label></td>
+                                <td><span class="badge-categoria">@producto.Categoria</span></td>
+                                <td class="text-end text-nowrap">@producto.PrecioTexto</td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var producto in Model.Productos)
-                            {
-                                var idCheck = $"producto-{producto.IdProducto}";
-                                <tr>
-                                    <td class="col-check">
-                                        <input type="checkbox" class="form-check-input" id="@idCheck"
-                                               name="Seleccionados" value="@producto.IdProducto"
-                                               checked="@Model.Seleccionados.Contains(producto.IdProducto)" />
-                                    </td>
-                                    <td>@producto.IdProducto</td>
-                                    <td><label for="@idCheck" class="mb-0">@producto.Nombre</label></td>
-                                    <td><span class="badge-categoria">@producto.Categoria</span></td>
-                                    <td class="text-end text-nowrap">@producto.PrecioTexto</td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                </div>
-                <button type="submit" class="btn btn-danger">Eliminar seleccionados</button>
-            </form>
-        }
-    </div>
-}
+                        }
+                    </tbody>
+                </table>
+            </div>
+            <button type="submit" class="btn btn-danger">Eliminar seleccionados</button>
+        </form>
+    }
+</div>
 
 <a asp-page="/Index" class="link-volver">&larr; Volver a la página principal</a>
+
+@section Scripts {
+    <script>
+        document.getElementById("form-baja")?.addEventListener("submit", function (evento) {
+            const marcados = Array.from(this.querySelectorAll("input[name='Seleccionados']:checked"));
+
+            if (marcados.length === 0) {
+                evento.preventDefault();
+                alert("Seleccione al menos un producto para eliminar.");
+                return;
+            }
+
+            const nombres = marcados.map(c => "- " + c.dataset.nombre).join("\n");
+            const pregunta = marcados.length === 1
+                ? "¿Está seguro de que desea eliminar el siguiente producto?"
+                : `¿Está seguro de que desea eliminar los siguientes ${marcados.length} productos?`;
+
+            if (!confirm(`${pregunta}\n\n${nombres}\n\nEsta acción no se puede deshacer.`)) {
+                evento.preventDefault();
+            }
+        });
+    </script>
+}

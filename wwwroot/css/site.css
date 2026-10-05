@@ -1,13 +1,14 @@
 :root {
-  --color-fondo: #f4f4f5;
-  --color-superficie: #ffffff;
-  --color-texto: #27272a;
-  --color-texto-suave: #71717a;
-  --color-borde: #e4e4e7;
-  --color-nav: #52525b;
-  --color-primario: #52525b;
-  --color-primario-oscuro: #3f3f46;
-  --color-peligro: #a14a4a;
+  --color-fondo: #f3ebe3;
+  --color-superficie: #fffaf5;
+  --color-texto: #3c2a21;
+  --color-texto-suave: #7a6a60;
+  --color-borde: #e0d2c4;
+  --color-nav: #3c2a21;
+  --color-primario: #6b4f3a;
+  --color-primario-oscuro: #523a2b;
+  --color-acento: #b87333;
+  --color-peligro: #9a4a3c;
   --radio: 6px;
 }
 
@@ -38,11 +39,17 @@ body {
 
 .navbar-tienda .navbar-brand {
   font-weight: 600;
+  letter-spacing: 0.3px;
   color: #fff;
 }
 
+.navbar-tienda .navbar-brand span {
+  color: #d4a574;
+  font-weight: 500;
+}
+
 .navbar-tienda .nav-link {
-  color: #e4e4e7;
+  color: #d7c8ba;
 }
 
 .navbar-tienda .nav-link:hover,
@@ -80,11 +87,12 @@ body {
   border-radius: var(--radio);
   color: inherit;
   text-decoration: none;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
 .menu-card:hover {
-  border-color: var(--color-texto-suave);
+  border-color: var(--color-acento);
+  background-color: #fff;
   color: inherit;
 }
 
@@ -109,10 +117,6 @@ body {
   margin-bottom: 1.5rem;
 }
 
-.panel-peligro {
-  border-left: 3px solid var(--color-peligro);
-}
-
 .form-label {
   font-weight: 500;
 }
@@ -120,6 +124,8 @@ body {
 .form-control,
 .form-select {
   border-radius: var(--radio);
+  border-color: var(--color-borde);
+  background-color: #fff;
 }
 
 .btn {
@@ -156,8 +162,8 @@ body {
 
 .btn-danger:hover,
 .btn-danger:focus {
-  background-color: #8a3d3d;
-  border-color: #8a3d3d;
+  background-color: #7f3c31;
+  border-color: #7f3c31;
 }
 
 .btn-outline-danger {
@@ -172,8 +178,8 @@ body {
 }
 
 .btn:focus, .btn:active:focus, .form-control:focus, .form-select:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.2rem rgba(82, 82, 91, 0.2);
-  border-color: var(--color-texto-suave);
+  box-shadow: 0 0 0 0.2rem rgba(184, 115, 51, 0.25);
+  border-color: var(--color-acento);
 }
 
 .form-check-input:checked {
@@ -204,7 +210,7 @@ body {
   display: inline-block;
   padding: 0.15rem 0.5rem;
   border-radius: var(--radio);
-  background-color: var(--color-fondo);
+  background-color: #efe4d8;
   border: 1px solid var(--color-borde);
   color: var(--color-texto);
   font-size: 0.85rem;
@@ -219,7 +225,7 @@ body {
 }
 
 .link-volver:hover {
-  color: var(--color-texto);
+  color: var(--color-primario);
   text-decoration: underline;
 }
 
